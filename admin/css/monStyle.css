@@ -1,0 +1,130 @@
+/** body **/
+* {
+    font-family: "nomADonner", serif;
+}
+
+.dash {
+    background: url(../images/post.jpg) fixed center/cover;
+    height: 100vh;
+}
+
+.btn-edit-delete{
+	padding: 2px;
+	margin: 0px;
+}
+
+h1{
+	font-size:50px;
+}
+
+.form-group {
+    position: relative;
+}
+
+.oeil{
+    position: absolute;
+    right: 14px;
+    top: 26px;
+	cursor: pointer;
+}
+
+.etoile{
+	font-size: 25px;
+    color: red;
+    position: absolute;
+    right: -3px;
+    top: 3px;
+}
+
+
+/*****   Tableau de bord ***********/
+
+
+.tableau-stat .stat{
+    padding: 20px;
+    font-size: 20px;
+    color:#FFF;
+    border-radius: 20px;
+    position:relative;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.tableau-stat .stat span{
+    position: absolute;
+    font-size: 80px;
+    top: 55px;
+    left: 15px;
+}
+
+.tableau-stat .stat .effectif{
+    float: right;
+}
+
+.tableau-stat .stat .nbr{
+    font-size: 60px;
+}
+
+.tableau-stat .stat12{
+    background: #3498db;
+}
+.tableau-stat .stat1{
+    background: #c0392b;
+}
+
+.tableau-stat .stat2{
+    background: #e67e22;
+}
+
+.my-row{
+    margin-bottom: 15px;
+}
+/* body {
+    background-color: #FFF;
+    transition: all 0.5s;
+} */
+
+:root {
+    --white: #fff;
+    --light: #f3f4ee;
+
+    --text-color-primary: #314657;
+}
+
+body {
+    background-color: var(--light);
+    color: var(--text-color-primary);
+    height: 100vh;
+    transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+
+body.active {
+    --white: #393e46;
+    --light: #222831;
+
+    --text-color-primary: rgb(124, 124, 124);
+}
+
+/* body.active, h1, thead {
+    background-color: rgb(14, 14, 14);
+    transition: all 0.5s;
+    color: #FFF;
+} */
+/**
+body.active {
+    background-color: rgb(14, 14, 14);
+    transition: all 0.5s;
+    /* color: #FFF; */
+    /* color: #f5801a; */
+    /* color: grey; *
+    color: rgb(124, 124, 124);
+}
+**/
+.clair {
+    display: none;
+}
+/* @media screen and (max-width: 477) {
+    .tableau-stat .stat {
+        margin-bottom: 200px;
+    }
+} */
