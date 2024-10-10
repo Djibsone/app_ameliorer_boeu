@@ -1,12 +1,10 @@
-
-	<?php
-		require('../utilisateurs/ma_session.php');
-		require('../utilisateurs/mon_role.php');
-	?>
+<?php
+	require('../utilisateurs/ma_session.php');
+	require('../utilisateurs/mon_role.php');
+?>
 
 <meta charset="utf-8"/>
 <?php
-
 
 	require('../connexion.php');
 	

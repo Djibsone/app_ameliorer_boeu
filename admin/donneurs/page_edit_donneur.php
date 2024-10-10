@@ -6,8 +6,7 @@
 	<?php
 		require('../connexion.php');
 		
-		$id_doneur=$_GET['id'];							 
-		//$annee_scolaire=$_GET['annee_scolaire'];
+		$id_doneur=$_GET['id'];
 
 		$requete="SELECT * FROM donneurs WHERE id=?";
 
@@ -36,45 +35,51 @@
 		<div class="container">
 <!-- ******************** Début Identité du donneur ************** -->
 			<div class="panel panel-primary">
-				<div class="panel-heading" align="center">Modifier donneur</div>
-					<div class="panel-body">
-						<form method="post" action="update_donneur.php">
-							
-							<input type="hidden" name="id" id="id" class="form-control"
-										value="<?php echo $le_donneur['id']; ?>">
+				<div class="panel-heading" style="display: flex; align-items: center; justify-content: center; position: relative;">
+					<a href="javascript:history.back()" style="position: absolute; left: 12px; text-decoration: none; color: inherit;">
+						<i class="fa fa-arrow-left" style="cursor: pointer; margin-right: 10px;"></i>
+					</a>
+					Modifier donneur
+				</div>
 
-                            <div class="row my-row">
-								<label for="nom" class="control-label col-sm-2">NOM COMPLET</label> 
-								<div class="col-sm-4">
-									<input type="text" name="nom" id="nom" class="form-control"
-									value="<?php echo $le_donneur['nomDon']; ?>"> 
-								</div>
+				<div class="panel-body">
+					<form method="post" action="update_donneur.php">
+						
+						<input type="hidden" name="id" id="id" class="form-control"
+									value="<?php echo $le_donneur['id']; ?>">
 
-								<label class="control-label col-sm-2">SEXE</label>
-								<div class="col-sm-4">
-									<select class="form-control" name="sexe">
-										<option><?php echo ($le_donneur['sexe']) ? $le_donneur['sexe'] : 'Sélectionner le sexe'; ?></option>
-										<option>M</option>
-										<option>F</option>
-									</select>
-								</div>
-
+						<div class="row my-row">
+							<label for="nom" class="control-label col-sm-2">NOM COMPLET</label> 
+							<div class="col-sm-4">
+								<input type="text" name="nom" id="nom" class="form-control"
+								value="<?php echo $le_donneur['nomDon']; ?>"> 
 							</div>
 
-                            <div class="row my-row">
-								<label for="nombre"class="control-label col-sm-2">NOMBRE DE BOEUX</label>
-								<div class="col-sm-4">
-									<input type="text" name="nombre" id="nombre"class="form-control" 
-									value="<?php echo $le_donneur['nbrB']; ?>">
-								</div>
-
+							<label class="control-label col-sm-2">SEXE</label>
+							<div class="col-sm-4">
+								<select class="form-control" name="sexe">
+									<option><?php echo ($le_donneur['sexe']) ? $le_donneur['sexe'] : 'Sélectionner le sexe'; ?></option>
+									<option>M</option>
+									<option>F</option>
+								</select>
 							</div>
 
-							<button type='submit' 
-									class="btn btn-primary btn-block"> Enregistrer <span class="fa fa-save"></span>
-							</button> 
-						</form>	
-					</div>
+						</div>
+
+						<div class="row my-row">
+							<label for="nombre"class="control-label col-sm-2">NOMBRE DE BOEUX</label>
+							<div class="col-sm-4">
+								<input type="text" name="nombre" id="nombre"class="form-control" 
+								value="<?php echo $le_donneur['nbrB']; ?>">
+							</div>
+
+						</div>
+
+						<button type='submit' 
+								class="btn btn-primary btn-block"> Enregistrer <span class="fa fa-save"></span>
+						</button> 
+					</form>	
+				</div>
 			</div>
 
 		</div>

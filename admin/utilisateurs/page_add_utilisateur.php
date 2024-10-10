@@ -23,7 +23,12 @@
 		<div class="container col-md-6 col-md-offset-3">
 		
 			<div class="panel panel-primary">
-				<div class="panel-heading">Nouvel utilisateur</div>
+				<div class="panel-heading">
+					<a href="javascript:history.back()" style="text-decoration: none; color: inherit;">
+						<i class="fa fa-arrow-left" style="cursor: pointer; margin-right: 10px;"></i>
+					</a>
+					Nouvel utilisateur
+				</div>
 				<div class="panel-body">
 				
 					<form class="form" action="insert_utilisateur.php" method="post">
@@ -61,7 +66,7 @@
 								<span class="fa fa-eye-slash fa-2x oeil" id="oeil"></span>
 								
 						</div>
-						
+						<br>
 						<input type="submit" value="Enregistrer" class="btn btn-primary btn-block">
 						<br>
 

@@ -31,7 +31,13 @@
 		<div class="container col-md-6 col-md-offset-3">
 		
 			<div class="panel panel-danger">
-				<div class="panel-heading">Modifier un utilisateur</div>
+				<div class="panel-heading">
+					<a href="javascript:history.back()" style="text-decoration: none; color: inherit;">
+						<i class="fa fa-arrow-left" style="cursor: pointer; margin-right: 10px;"></i>
+					</a>
+					Modifier un utilisateur
+				</div>
+
 				<div class="panel-body">
 				
 					<form class="form" action="update_utilisateur.php" method="post">

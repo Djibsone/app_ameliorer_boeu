@@ -34,57 +34,62 @@
         
 		<div class="container">
 			<div class="panel panel-info">
-				<div class="panel-heading" align="center">  <h3>Modifier un réceveur</h3>   </div>
-					<div class="panel-body">
-						<form method="post" action="update_receveur.php">
+				<div class="panel-heading" style="display: flex; align-items: center; justify-content: center; position: relative;">
+					<a href="javascript:history.back()" style="position: absolute; left: 12px; text-decoration: none; color: inherit;">
+						<i class="fa fa-arrow-left" style="cursor: pointer; margin-right: 10px;"></i>
+					</a>
+					<h3 >Modifier receveur </h3>
+				</div>
+				<div class="panel-body">
+					<form method="post" action="update_receveur.php">
 
-                            <!-- ************ Début  id_receveur: *************** -->
-							
-						   <input type="hidden" name="id" 
-						   			value="<?php echo $le_receveur['id'] ?>">
+						<!-- ************ Début  id_receveur: *************** -->
+						
+						<input type="hidden" name="id" 
+								value="<?php echo $le_receveur['id'] ?>">
 
-                             <!-- ************ Début  id_receveur: *************** -->
+							<!-- ************ Début  id_receveur: *************** -->
 
-                            <!-- ************ Début  Nom: *************** -->
-                            <div class="row my-row">
-								<label for="nom" class="control-label col-sm-2">NOM COMPLET DU RECEVEUR</label> 
-									<div class="col-sm-4">
-										<input type="text" name="nom" 
-                                        id="nom" class="form-control" value="<?php echo $le_receveur['nomRe'] ?>"> 
-									</div>
-
-							<!-- ************ Fin  nom: *************** -->
-                            
-                            <!-- ************ Début  sexe: *************** -->	
-								<label for="sexe" class="control-label col-sm-2">SEXE</label> 
+						<!-- ************ Début  Nom: *************** -->
+						<div class="row my-row">
+							<label for="nom" class="control-label col-sm-2">NOM COMPLET DU RECEVEUR</label> 
 								<div class="col-sm-4">
-									<select class="form-control" name="sexe">
-										<option><?php echo ($le_receveur['sexeR']) ? $le_receveur['sexeR'] : 'Sélectionner le sexe'; ?></option>
-										<option>M</option>
-										<option>F</option>
-									</select>
+									<input type="text" name="nom" 
+									id="nom" class="form-control" value="<?php echo $le_receveur['nomRe'] ?>"> 
 								</div>
 
+						<!-- ************ Fin  nom: *************** -->
+						
+						<!-- ************ Début  sexe: *************** -->	
+							<label for="sexe" class="control-label col-sm-2">SEXE</label> 
+							<div class="col-sm-4">
+								<select class="form-control" name="sexe">
+									<option><?php echo ($le_receveur['sexeR']) ? $le_receveur['sexeR'] : 'Sélectionner le sexe'; ?></option>
+									<option>Masculin</option>
+									<option>Féminin</option>
+								</select>
 							</div>
-							<!-- ************ Fin  sexe: *************** -->
-                            
-                            <!-- ************ Début  localite: *************** -->
-                            <div class="row my-row">
-								<label for="localite"class="control-label col-sm-2">LOCALITE DU RECEVEUR</label>
-									<div class="col-sm-4">								
-								        <input type="text" name="localite" 
-                                        id="localite"class="form-control"
-                                        value="<?php echo $le_receveur['localite'] ?>"> 
-									</div>
 
-							<!-- ************ Fin localite: *************** -->
-                            </div>                          		  
+						</div>
+						<!-- ************ Fin  sexe: *************** -->
+						
+						<!-- ************ Début  localite: *************** -->
+						<div class="row my-row">
+							<label for="localite"class="control-label col-sm-2">LOCALITE DU RECEVEUR</label>
+								<div class="col-sm-4">								
+									<input type="text" name="localite" 
+									id="localite"class="form-control"
+									value="<?php echo $le_receveur['localite'] ?>"> 
+								</div>
 
-							<button type='submit' class="btn btn-info btn-block"> 
-								Enregistrer <span class="fa fa-save"></span>
-							</button> 
-						</form>	
-					</div>
+						<!-- ************ Fin localite: *************** -->
+						</div>                          		  
+
+						<button type='submit' class="btn btn-info btn-block"> 
+							Enregistrer <span class="fa fa-save"></span>
+						</button> 
+					</form>	
+				</div>
 			</div>
 		</div>
 

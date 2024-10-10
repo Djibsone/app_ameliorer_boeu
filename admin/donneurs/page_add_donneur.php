@@ -22,7 +22,12 @@ require('../utilisateurs/mon_role.php');
 <div class="container">
 
     <div class="panel panel-primary">
-        <div class="panel-heading" align="center">Nouveau donneur</div>
+        <div class="panel-heading" style="display: flex; align-items: center; justify-content: center; position: relative;">
+            <a href="javascript:history.back()" style="position: absolute; left: 12px; text-decoration: none; color: inherit;">
+                <i class="fa fa-arrow-left" style="cursor: pointer; margin-right: 10px;"></i>
+            </a>
+            Nouveau donneur
+        </div>
         <div class="panel-body">
             <form method="post" action="insert_donneur.php">
 
