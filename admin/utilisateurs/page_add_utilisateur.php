@@ -24,10 +24,8 @@
              <form class="form" action="insert_utilisateur.php" method="post">
 
                  <div class="form-group">
-                     <label for="login" class="label-control">Login</label>
-                     <input type="text" name="login" id="login" class="form-control" autocomplete="off"
-                         required>
-
+                    <label class="label-control">Nom</label>
+                    <input type="text" name="login" id="login" class="form-control" required>
                  </div>
 
                  <?php if(isset($_SESSION['user']) && $_SESSION['user']['role']=="Administrateur") {?>
@@ -43,7 +41,7 @@
 
                  <div class="form-group">
                      <label for="email" class="label-control">Email</label>
-                     <input type="email" name="email" autocomplete="off" id="email" class="form-control"
+                     <input type="email" name="email" id="email" class="form-control"
                          required>
 
                  </div>

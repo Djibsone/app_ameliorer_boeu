@@ -1,24 +1,24 @@
 
-$(function(){	
-	// ******************** Avec id ******************
-		/*
+	$(document).ready(function () {
+    // ******************** Avec id ******************
+    /*
 			$('#oeil').hover(
 				function(){$('#pwd').attr('type','text')},
 				function(){$('#pwd').attr('type','password')}
 			);
 		
 		*/
-		
-	// *******************Avec class******************
-		/*
+
+    // *******************Avec class******************
+    /*
 			$('.oeil').hover(
 				function(){$('.pwd').attr('type','text')},
 				function(){$('.pwd').attr('type','password')}
 			);		
 		*/
-	
-	// *******************Avec variables js******************
-	/*
+
+    // *******************Avec variables js******************
+    /*
 		var input_pwd=$('#pwd'); 	//#pwd fait référence à l'element HTML ayant id="pwd"
 		var span_oeil=$('.oeil'); 	//.oeil fait référence à l'element HTML ayant class="oeil"
 		
@@ -37,92 +37,79 @@ $(function(){
 		);
 	
 	*/
-	
-	
-	
-	// ******************* Avec Click ******************
-	
-		var input_pwd = $('#pwd'); 	//#pwd fait réfèrence à l'element HTML ayant id="pwd"
-		var input_newpwd = $("#newpwd");
-		var input_cpwd = $("#cpwd");
-		var span_oeil = $('.oeil'); 	//.oeil fait rèfèrence à l'element HTML ayant class="oeil"
-		var span_oeil1 = $(".oeil1"); 
-		var span_oeil2 = $(".oeil2"); 
 
-		$(span_oeil, span_oeil1, span_oeil2).click(
-		
-			function(){
-			
-				if($(input_pwd, input_newpwd, input_cpwd).attr('type')==='password'){
-					$(input_pwd, input_newpwd, input_cpwd).attr('type','text');
-					$(this).attr('class','fa fa-eye fa-2x oeil');
-					//this : l'element ayant declanché l'évenement click
-				}
-				else{
-					$(input_pwd, input_newpwd, input_cpwd).attr('type','password');
-					$(this).attr('class','fa fa-eye-slash fa-2x oeil');				
-				}
-			}
-			
-		);
+    // ******************* Avec Click ******************
+	$(".oeil").click(function () {
+		var input = $(this).siblings("input");
 
-		// $(span_oeil).click(
-		
-		// 	function(){
-			
-		// 		if($(input_newpwd).attr('type')==='password'){
-		// 			$(input_newpwd).attr('type','text');
-		// 			$(this).attr('class','fa fa-eye fa-2x oeil');
-		// 			//this : l'element ayant declanché l'évenement click
-		// 		}
-		// 		else{
-		// 			$(input_newpwd).attr('type','password');
-		// 			$(this).attr('class','fa fa-eye-slash fa-2x oeil');				
-		// 		}
-		// 	}
-			
-		// );
-
-		// $(span_oeil).click(
-		
-		// 	function(){
-			
-		// 		if($(input_cpwd).attr('type')==='password'){
-		// 			$(input_cpwd).attr('type','text');
-		// 			$(this).attr('class','fa fa-eye fa-2x oeil');
-		// 			//this : l'element ayant declanché l'évenement click
-		// 		}
-		// 		else{
-		// 			$(input_cpwd).attr('type','password');
-		// 			$(this).attr('class','fa fa-eye-slash fa-2x oeil');				
-		// 		}
-		// 	}
-			
-		// );
-	
-	
-	$('input').each(function(){  // pour chaque élément input de toute l'application
-		if($(this).attr('required')==='required'){  // si l'élément est obligatoire
-			$(this).after('<span class="etoile">*</span>'); // Afficher une étoile aprés l'élémnt
+		if (input.attr("type") === "password") {
+			input.attr("type", "text");
+			$(this).attr("class", "fa fa-eye fa-2x oeil");
+		} else {
+			input.attr("type", "password");
+			$(this).attr("class", "fa fa-eye-slash fa-2x oeil");
 		}
 	});
-	
-	//Chamgement de couleur 
-	const theme = document.querySelector(".theme");
-	const body = document.querySelector("body");
-	const nuit = document.querySelector(".nuit");
-	const clair = document.querySelector(".clair");
-	const thead = document.querySelector("thead");
-	const h1 = document.querySelector("h1");
+   
 
-	theme.addEventListener('click', () => {
-		body.classList.toggle('active')
-		if (body.classList.contains('active')) {
-			clair.style.display = 'block';
-			nuit.style.display = 'none'
-		} else {
-			clair.style.display = 'none';
-			nuit.style.display = 'block'
-		}
-	})
-});
+    // $(span_oeil).click(
+
+    // 	function(){
+
+    // 		if($(input_newpwd).attr('type')==='password'){
+    // 			$(input_newpwd).attr('type','text');
+    // 			$(this).attr('class','fa fa-eye fa-2x oeil');
+    // 			//this : l'element ayant declanché l'évenement click
+    // 		}
+    // 		else{
+    // 			$(input_newpwd).attr('type','password');
+    // 			$(this).attr('class','fa fa-eye-slash fa-2x oeil');
+    // 		}
+    // 	}
+
+    // );
+
+    // $(span_oeil).click(
+
+    // 	function(){
+
+    // 		if($(input_cpwd).attr('type')==='password'){
+    // 			$(input_cpwd).attr('type','text');
+    // 			$(this).attr('class','fa fa-eye fa-2x oeil');
+    // 			//this : l'element ayant declanché l'évenement click
+    // 		}
+    // 		else{
+    // 			$(input_cpwd).attr('type','password');
+    // 			$(this).attr('class','fa fa-eye-slash fa-2x oeil');
+    // 		}
+    // 	}
+
+    // );
+
+    $("input").each(function () {
+      // pour chaque élément input de toute l'application
+      if ($(this).attr("required") === "required") {
+        // si l'élément est obligatoire
+        $(this).after('<span class="etoile">*</span>'); // Afficher une étoile aprés l'élémnt
+      }
+    });
+
+    //Chamgement de couleur
+    const theme = document.querySelector(".theme");
+    const body = document.querySelector("body");
+    const nuit = document.querySelector(".nuit");
+    const clair = document.querySelector(".clair");
+    const thead = document.querySelector("thead");
+    const h1 = document.querySelector("h1");
+
+    theme.addEventListener("click", () => {
+      body.classList.toggle("active");
+      if (body.classList.contains("active")) {
+        clair.style.display = "block";
+        nuit.style.display = "none";
+      } else {
+        clair.style.display = "none";
+        nuit.style.display = "block";
+      }
+    });
+  });

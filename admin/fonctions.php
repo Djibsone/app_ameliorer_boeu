@@ -38,12 +38,12 @@ function les_annee_scolaire($annee_debut = 2010)
 }
 
 //Recherche par login
-function recherche_user_byLogin($login)
+function recherche_user_byLogin($email)
 {
     global $pdo;
 
-    $req = $pdo->prepare('SELECT * FROM utilisateur WHERE login=?');
-    $valeur = [$login];
+    $req = $pdo->prepare('SELECT * FROM utilisateur WHERE email = ?');
+    $valeur = [$email];
     $req->execute($valeur);
 
     if ($req->rowCount() > 0) {
@@ -57,7 +57,7 @@ function recherche_user_byLogin($login)
 function recherche_user_byLoginId($login, $id)
 {
     global $pdo;
-    $req = $pdo->prepare('select * from utilisateur where login=? and id_utilisateur!=?');
+    $req = $pdo->prepare('SELECT * FROM utilisateur WHERE login = ? AND id_utilisateur != ?');
     $valeur = [$login, $id];
     $req->execute($valeur);
     $nbr_user = $req->rowCount();
@@ -153,27 +153,84 @@ function dateFrToDateEn($dateFr)
 function getEffectifD()
 {
     global $pdo;
-    $res = $pdo->query('select coalesce(count(*), 0) effectif from donneurs');
-    $nbr = $res->fetch();
-    return $nbr['effectif'];
+    $sql = '
+        SELECT 
+            COUNT(*) AS total, 
+            COUNT(CASE WHEN sexe = "Masculin" THEN 1 END) AS total_garcons, 
+            COUNT(CASE WHEN sexe = "Féminin" THEN 1 END) AS total_filles 
+        FROM 
+            donneurs
+    ';
+    
+    $res = $pdo->query($sql);
+    $nbr = $res->fetch(PDO::FETCH_ASSOC);
+    
+    return [
+        'total' => $nbr['total'], 
+        'garcons' => $nbr['total_garcons'], 
+        'filles' => $nbr['total_filles']
+    ];
 }
+
 
 //Effectif des inscris de receveurs
 function getEffectifR()
 {
     global $pdo;
-    $res = $pdo->query('select coalesce(count(*), 0) effectif from receveurs');
-    $nbr = $res->fetch();
-    return $nbr['effectif'];
+    $sql = '
+        SELECT 
+            COUNT(*) AS total, 
+            COUNT(CASE WHEN sexeR = "Masculin" THEN 1 END) AS total_garcons, 
+            COUNT(CASE WHEN sexeR = "Féminin" THEN 1 END) AS total_filles 
+        FROM 
+            receveurs
+    ';
+    
+    $res = $pdo->query($sql);
+    $nbr = $res->fetch(PDO::FETCH_ASSOC);
+    
+    return [
+        'total' => $nbr['total'], 
+        'garcons' => $nbr['total_garcons'], 
+        'filles' => $nbr['total_filles']
+    ];
 }
 
 //Effectif des inscris de boeux
 function getEffectifB()
 {
     global $pdo;
-    $res = $pdo->query('select coalesce(sum(nbreB), 0) effectif from avoir');
+    $res = $pdo->query('SELECT coalesce(sum(nbreB), 0) effectif FROM avoir');
     $nbr = $res->fetch();
     return $nbr['effectif'];
 }
+
+//Verifier les caractères spéciaux
+function verifierCaractereSpeciaux($data) {
+    $regex = "/^[a-zA-ZÀ-ÖØ-öø-ÿ\s'-]+$/";
+    if (is_array($data)) {
+        foreach ($data as $element) {
+            if (!preg_match($regex, $element)) {
+                return false;
+            }
+        }
+    } else {
+        if (!preg_match($regex, $data)) {
+            return false;
+        }
+    }
+    
+    return true;
+}
+
+//Verifier le nombres
+function formatNumber($number) {
+    if ($number >= 0 && $number <= 9) {
+        return str_pad($number, 2, '0', STR_PAD_LEFT);
+    } else {
+        return $number;
+    }
+}
+
 
 ?>

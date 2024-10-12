@@ -7,9 +7,9 @@
     require_once('../fonctions.php');
 
     $as = annee_scolaire_actuelle();
-    $n1 = getEffectifD();
-    $n2 = getEffectifR();
-    $n3 = getEffectifB();
+    $donneurs = getEffectifD();
+    $receveurs = getEffectifR();
+    $nbrBoeux = getEffectifB();
 
 ?>
 
@@ -23,9 +23,16 @@
                 <span class="fa fa-user-plus"></span>
                 <div class="effectif">
                     Nombre total des donneurs
-                    <div class="nbr"><?= $n1 ?></div>
+                    <div class="nbr"><?= formatNumber($donneurs['total']) ?></div>
+                    <div class="gender-count d-flex justify-content-between">
+                        <div class="text-left">
+                            Garçons: <?= formatNumber($donneurs['garcons']) ?>
+                        </div>
+                        <div class="text-right">
+                            Filles: <?= formatNumber($donneurs['filles']) ?>
+                        </div>
+                    </div>
                 </div>
-
             </div>
         </div>
 
@@ -34,7 +41,15 @@
                 <span class="fa fa-user-plus"></span>
                 <div class="effectif">
                     Nombre total des receveurs
-                    <div class="nbr"><?= $n2 ?></div>
+                    <div class="nbr"><?= formatNumber($receveurs['total']) ?></div>
+                    <div class="gender-count d-flex justify-content-between">
+                        <div class="text-left">
+                            Garçons: <?= formatNumber($receveurs['garcons']) ?>
+                        </div>
+                        <div class="text-right">
+                            Filles: <?= formatNumber($receveurs['filles']) ?>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -44,7 +59,7 @@
                 <span class="fa fa-paw"></span>
                 <div class="effectif">
                     Nombre total des boeux
-                    <div class="nbr"><?= $n3 ?></div>
+                    <div class="nbr"><?= formatNumber($nbrBoeux) ?></div>
                 </div>
             </div>
         </div>

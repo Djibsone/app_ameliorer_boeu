@@ -3,10 +3,10 @@ session_start();
 require '../connexion.php';
 include '../fonctions.php';
 
-$login = $_POST['login'];
+$email = $_POST['email'];
 $pwd = $_POST['pwd'];
 
-$user = recherche_user_byLogin($login);
+$user = recherche_user_byLogin($email);
 
 if ($user) {
     if (password_verify($pwd, $user['pwd'])) {
@@ -19,7 +19,7 @@ if ($user) {
         header("location:../message.php?msg=$msg&color=r&url=$url");
     }
 } else {
-    $msg = 'Le login ou le mot de passe est incorrect';
+    $msg = 'L\'email ou le mot de passe incorrect';
     $url = 'utilisateurs/login.php';
     header("location:../message.php?msg=$msg&color=r&url=$url");
 }
