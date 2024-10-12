@@ -42,25 +42,63 @@ $(function(){
 	
 	// ******************* Avec Click ******************
 	
-		var input_pwd=$('#pwd'); 	//#pwd fait réfèrence à l'element HTML ayant id="pwd"
-		var span_oeil=$('.oeil'); 	//.oeil fait rèfèrence à l'element HTML ayant class="oeil"
-		
-		$(span_oeil).click(
+		var input_pwd = $('#pwd'); 	//#pwd fait réfèrence à l'element HTML ayant id="pwd"
+		var input_newpwd = $("#newpwd");
+		var input_cpwd = $("#cpwd");
+		var span_oeil = $('.oeil'); 	//.oeil fait rèfèrence à l'element HTML ayant class="oeil"
+		var span_oeil1 = $(".oeil1"); 
+		var span_oeil2 = $(".oeil2"); 
+
+		$(span_oeil, span_oeil1, span_oeil2).click(
 		
 			function(){
 			
-				if($(input_pwd).attr('type')==='password'){
-					$(input_pwd).attr('type','text');
+				if($(input_pwd, input_newpwd, input_cpwd).attr('type')==='password'){
+					$(input_pwd, input_newpwd, input_cpwd).attr('type','text');
 					$(this).attr('class','fa fa-eye fa-2x oeil');
 					//this : l'element ayant declanché l'évenement click
 				}
 				else{
-					$(input_pwd).attr('type','password');
+					$(input_pwd, input_newpwd, input_cpwd).attr('type','password');
 					$(this).attr('class','fa fa-eye-slash fa-2x oeil');				
 				}
 			}
 			
 		);
+
+		// $(span_oeil).click(
+		
+		// 	function(){
+			
+		// 		if($(input_newpwd).attr('type')==='password'){
+		// 			$(input_newpwd).attr('type','text');
+		// 			$(this).attr('class','fa fa-eye fa-2x oeil');
+		// 			//this : l'element ayant declanché l'évenement click
+		// 		}
+		// 		else{
+		// 			$(input_newpwd).attr('type','password');
+		// 			$(this).attr('class','fa fa-eye-slash fa-2x oeil');				
+		// 		}
+		// 	}
+			
+		// );
+
+		// $(span_oeil).click(
+		
+		// 	function(){
+			
+		// 		if($(input_cpwd).attr('type')==='password'){
+		// 			$(input_cpwd).attr('type','text');
+		// 			$(this).attr('class','fa fa-eye fa-2x oeil');
+		// 			//this : l'element ayant declanché l'évenement click
+		// 		}
+		// 		else{
+		// 			$(input_cpwd).attr('type','password');
+		// 			$(this).attr('class','fa fa-eye-slash fa-2x oeil');				
+		// 		}
+		// 	}
+			
+		// );
 	
 	
 	$('input').each(function(){  // pour chaque élément input de toute l'application

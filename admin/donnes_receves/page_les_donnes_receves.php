@@ -1,38 +1,21 @@
 ﻿<?php
-	require('../utilisateurs/ma_session.php');
-	global $i;
-?>
-	
-<?php
-			
+	require('../utilisateurs/ma_session.php');	
 	require('../connexion.php');
+	include('../sheard/head.php');
+    include('../menu.php');
+
+	global $i;
 	
-	$requete_donnes_receves="SELECT
+	$requete_donnes_receves = "SELECT
 			a.*, d.nomDon, d.sexe, d.nbrB, r.nomRe, r.sexeR, r.localite 
 			FROM donneurs d, receveurs r, avoir a 
 			WHERE d.id=a.id_don AND r.id=a.id_re ORDER BY id DESC";	
 
-	$result_requete_donnes_receves=$pdo->query($requete_donnes_receves);
-	$tous_les_donnes_receves=$result_requete_donnes_receves->fetchAll();
+	$result_requete_donnes_receves = $pdo->query($requete_donnes_receves);
+	$tous_les_donnes_receves = $result_requete_donnes_receves->fetchAll();
 		
 ?>		
-	
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8"/>
-		<title>  les donneurs & receveurs </title> 
-		
-		<link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
-		<link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css">
-		<link rel="stylesheet" type="text/css" href="../css/monStyle.css">
-		
-	</head>
-		
-	<body>
-	<!-- debut *************************************** -->
-	<?php include('../menu.php'); ?>
-	<!--  fin **************************************** -->
+
 	<br><br><br><br>
 		<div class="container">
 			<h1 class="text-center">Liste des donneurs & receveurs</h1>
@@ -40,17 +23,14 @@
 			<div class="panel panel-primary">
 				<div class="panel-heading">Rechecher des donneurs & receveurs</div>
 				<div class="panel-body">
-					<form class="form-inline" method="post">
-							
-						<input type="text" name="q" id="q" class="form-control lg" placeholder="Recherche par nom">
-													
+					<form class="form-inline" method="post">							
+						<input type="text" name="q" id="q" class="form-control lg" placeholder="Recherche par nom">													
 						<button type="" class="btn btn-primary" name=""> 
 							<span class="fa fa-search"></span>
 						</button> 
 					</form>
 				</div>
-			</div>
-			
+			</div>			
 			
 			<table class="table table-striped">
 				<thead>
@@ -67,33 +47,30 @@
 					<?php foreach($tous_les_donnes_receves as $le_donne_receve){  ?>
 						
 						<tr>
-							<td><?php echo $i += 1 ?></td> 
-							<td><?php echo $le_donne_receve['nomDon'] ?></td> 
-							<td><?php echo $le_donne_receve['nbrB'] ?></td>
-							<td><?php echo $le_donne_receve['sexe'] ?></td>
-							<td><?php echo $le_donne_receve['nomRe'] ?></td>
-							<td><?php echo $le_donne_receve['nbreB'] ?></td>
-							<td><?php echo $le_donne_receve['sexeR'] ?></td> 
-							<td><?php echo $le_donne_receve['localite'] ?></td> 
+							<td><?= $i += 1 ?></td> 
+							<td><?= $le_donne_receve['nomDon'] ?></td> 
+							<td class="text-center"><?= $le_donne_receve['nbrB'] ?></td>
+							<td><?= $le_donne_receve['sexe'] ?></td>
+							<td><?= $le_donne_receve['nomRe'] ?></td>
+							<td class="text-center"><?= $le_donne_receve['nbreB'] ?></td>
+							<td><?= $le_donne_receve['sexeR'] ?></td> 
+							<td><?= $le_donne_receve['localite'] ?></td> 
 							<?php if($_SESSION['user']['role']=='Administrateur'){  ?>
 								<td> 
-									
-									<a href="page_edit_donne_receve.php?id=<?php echo $le_donne_receve['id']?>"
+									<a href="page_edit_donne_receve.php?id=<?= $le_donne_receve['id'] ?>"
 										class="btn btn-success btn-edit-delete"> 
 										<span class="fa fa-edit"></span>
-									</a>
-										
+									</a>										
 									<a 
 										onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')"
-										href="delete_donne_receve.php?id=<?php echo $le_donne_receve['id']?>"
+										href="delete_donne_receve.php?id=<?= $le_donne_receve['id'] ?>"
 										class="btn btn-danger btn-edit-delete">
 										<span class="fa fa-trash"></span>
 									</a>
 										
 								</td>
 							<?php } ?>
-						</tr>
-					
+						</tr>					
 					<?php } ?>
 				</tbody>
 			</table>
@@ -121,15 +98,13 @@
 						url: '../page_recherche.php',
 						type: 'POST',
 						data: { q_d_r: recherche },
-						dataType: 'json', // Indique que la réponse doit être traitée comme JSON
+						dataType: 'json',
 						success: function (data) {
-							// Traitez les données JSON et mettez à jour l'affichage
 							tableBody.empty();
 							error.empty();
 
 							if (data.length > 0) {
 								$.each(data, function (index, resultat) {
-									// Créez un élément li pour chaque résultat
 									var row = `
 											<tr>
 												<td>${index + 1}</td>
@@ -157,19 +132,16 @@
 												<?php } ?>
 											</tr>
 										`;
-									// Ajoutez l'élément li à la liste des résultats
 									tableBody.append(row);
 								});
 							}
 							else {
 								error.append(("<h2>Aucun résultat trouvé.</h2>"));
-								// error.append(("<h2>Oups ! aucun résultat trouvé.</h2>"));
 							}
 						}
 					});
 				});
 			});
-
 
 		</script>
 	</body>

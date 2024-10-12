@@ -1,10 +1,9 @@
 ﻿<?php
     require('../utilisateurs/ma_session.php');
     require('../utilisateurs/mon_role.php');
-?>
-
-<?php
     require('../connexion.php');
+    include('../sheard/head.php');
+    include('../menu.php');
 
     $id = $_GET['id'];
     //$stmt = $pdo->prepare("SELECT a.*, d.nomDon, d.id as id_donne, r.nomRe, r.id as id_receve FROM donneurs d JOIN avoir a ON d.id = a.id_don JOIN receveurs r ON r.id = a.id_re WHERE a.id = ?");
@@ -12,35 +11,23 @@
     $stmt->execute(array($id));
     $donne_receve = $stmt->fetch();
     
-
-    //donneur
     $requete=$pdo->query("select * from donneurs");
     $tous_les_donneurs=$requete->fetchAll();
 
-    //receveur
     $req=$pdo->query("select * from receveurs");
     $tous_les_receveurs=$req->fetchAll();
 
 ?>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8"/>
-    <title> Modifier la filière </title>
-    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="../css/monStyle.css">
-
-</head>
-
-<body>
-<?php include('../menu.php'); ?>
 <br><br><br><br><br><br>
 
 <div class="container">
     <div class="panel panel-primary">
-        <div class="panel-heading" align="center"> Modification</div>
+        <div class="panel-heading" style="display: flex; align-items: center; justify-content: center; position: relative;">
+            <a href="javascript:history.back()" style="position: absolute; left: 12px; text-decoration: none; color: inherit;">
+                <i class="fa fa-arrow-left" style="cursor: pointer; margin-right: 10px;"></i>
+            </a>
+            Modification
+        </div>
         <div class="panel-body">
 
             <form method="post" action="update_donne_receve.php">
@@ -86,8 +73,4 @@
     </div>
 </div>
 
-<script src="../js/jquery-1.10.2.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/script.js"></script>
-</body>
-</html>
+<?php include('../sheard/footer.php') ?>
