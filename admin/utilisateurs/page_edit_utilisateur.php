@@ -7,9 +7,15 @@
  
  $id = $_GET['id'];
  
- $requete = "select * from utilisateur where id_utilisateur=$id";
- $resultat = $pdo->query($requete);
- $utilisateur = $resultat->fetch();
+ if (empty($id) || !is_numeric($id)) {
+     $msg = 'Utilisateur non identifié';
+     $url = 'utilisateurs/page_les_utilisateurs.php';
+     header("location:../message.php?msg=$msg&color=r&url=$url");
+ }
+ 
+ $stmt = $pdo->prepare('SELECT * FROM utilisateur WHERE id_utilisateur = ?');
+ $stmt->execute([$id]);
+ $utilisateur = $stmt->fetch();
  
  ?>
 
@@ -49,7 +55,7 @@
                              Visiteur
                          </option>
 
-                         <option <?php if ($utilisateur['role'] == 'Directeur') {
+                         <option <?php if ($utilisateur['role'] == 'Administrateur') {
                              echo 'selected';
                          }
                          ?>>
@@ -62,16 +68,10 @@
                  <?php } ?>
 
                  <div class="form-group">
-                     <label for="pwd" class="label-control">Mot de passe</label>
-                     <input type="password" name="pwd" id="pwd" class="form-control"
-                         value="<?php echo $utilisateur['pwd']; ?>">
-                    <span class="fa fa-eye-slash fa-2x oeil" id="oeil"></span>
-                 </div>
-
-                 <div class="form-group">
-                     <label for="email" class="label-control">Email</label>
+                     <label for="email" class="label-control">Email (<span class="text-info"><i>Votre e-mail n'est
+                                 pas modifiable</i></span>)</label>
                      <input type="email" name="email" autocomplete="off" id="email" class="form-control"
-                         required value="<?php echo $utilisateur['email']; ?>">
+                         required value="<?php echo $utilisateur['email']; ?>" disabled>
                  </div>
 
                  <input type="submit" value="Enregistrer" class="btn btn-success btn-block">

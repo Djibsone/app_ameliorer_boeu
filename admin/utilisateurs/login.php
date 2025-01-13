@@ -1,7 +1,7 @@
 ﻿ <?php include '../sheard/head.php' ?>
 
  <br><br><br><br><br>
- <div class="container col-md-4 col-md-offset-4">
+ <div class="container col-md-6 col-md-offset-3">
      <div class="panel panel-primary">
          <div class="panel-heading">Se connecter</div>
          <div class="panel-body">
@@ -9,7 +9,7 @@
 
                  <div class="form-group">
                     <label class="label-control">Email</label>
-                    <input type="text" name="email" id="email" class="form-control" required>
+                    <input type="email" name="email" id="email" class="form-control" required>
                  </div>
                  <div class="form-group">
                     <label for="pwd" class="label-control">Mot de passe</label>

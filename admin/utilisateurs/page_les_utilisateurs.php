@@ -7,7 +7,8 @@
  include '../menu.php';
  
  $requete = 'select * from utilisateur';
- $resultat = $pdo->query($requete);
+ $resultat = $pdo->prepare($requete);
+ $resultat->execute();
  $les_utilisateurs = $resultat->fetchAll();
  global $i;
  ?>
@@ -44,7 +45,7 @@
                                  <span class="fa fa-edit"></span>
                              </a>
                              &nbsp&nbsp
-                             <a onclick='return confirm("Etes-vous sûr ???")'
+                             <a onclick='return confirm("Etes-vous sûr de supprimer <?php echo $utilisateur["login"]; ?> ???")'
                                  href="delete_utilisateur.php?id=<?php echo $utilisateur['id_utilisateur']; ?>"
                                  class="btn btn-danger btn-edit-delete">
                                  <span class="fa fa-trash"></span>

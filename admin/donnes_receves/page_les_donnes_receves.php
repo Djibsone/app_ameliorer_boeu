@@ -11,20 +11,21 @@
 			FROM donneurs d, receveurs r, avoir a 
 			WHERE d.id=a.id_don AND r.id=a.id_re ORDER BY id DESC";	
 
-	$result_requete_donnes_receves = $pdo->query($requete_donnes_receves);
+	$result_requete_donnes_receves = $pdo->prepare($requete_donnes_receves);
+	$result_requete_donnes_receves->execute();
 	$tous_les_donnes_receves = $result_requete_donnes_receves->fetchAll();
 		
 ?>		
 
 	<br><br><br><br>
 		<div class="container">
-			<h1 class="text-center">Liste des donneurs & receveurs</h1>
+			<h1 class="text-center">Liste des transferts</h1>
 			
 			<div class="panel panel-primary">
-				<div class="panel-heading">Rechecher des donneurs & receveurs</div>
+				<div class="panel-heading">Rechecher</div>
 				<div class="panel-body">
 					<form class="form-inline" method="post">							
-						<input type="text" name="q" id="q" class="form-control lg" placeholder="Recherche par nom">													
+						<input type="text" name="q" id="q" class="form-control lg" placeholder="Recherche par nom (donneur et receveur)">													
 						<button type="" class="btn btn-primary" name=""> 
 							<span class="fa fa-search"></span>
 						</button> 
@@ -49,10 +50,10 @@
 						<tr>
 							<td><?= $i += 1 ?></td> 
 							<td><?= $le_donne_receve['nomDon'] ?></td> 
-							<td class="text-center"><?= $le_donne_receve['nbrB'] ?></td>
+							<td style="text-align: center;"><?= $le_donne_receve['nbrB'] ?></td>
 							<td><?= $le_donne_receve['sexe'] ?></td>
 							<td><?= $le_donne_receve['nomRe'] ?></td>
-							<td class="text-center"><?= $le_donne_receve['nbreB'] ?></td>
+							<td style="text-align: center;"><?= $le_donne_receve['nbreB'] ?></td>
 							<td><?= $le_donne_receve['sexeR'] ?></td> 
 							<td><?= $le_donne_receve['localite'] ?></td> 
 							<?php if($_SESSION['user']['role']=='Administrateur'){  ?>
@@ -62,7 +63,7 @@
 										<span class="fa fa-edit"></span>
 									</a>										
 									<a 
-										onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')"
+										onclick="return confirm('Etes-vous sûr de vouloir supprimer le transfert ???')"
 										href="delete_donne_receve.php?id=<?= $le_donne_receve['id'] ?>"
 										class="btn btn-danger btn-edit-delete">
 										<span class="fa fa-trash"></span>

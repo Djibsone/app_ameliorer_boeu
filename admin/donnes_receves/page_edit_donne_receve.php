@@ -6,15 +6,22 @@
     include('../menu.php');
 
     $id = $_GET['id'];
+    if (empty($id) || !is_numeric($id)) {
+        $msg = 'Donnée non valide';
+        $url = 'donnes_receves/page_les_donnes_receves.php';
+        header("location:../message.php?msg=$msg&color=r&url=$url");
+    }
     //$stmt = $pdo->prepare("SELECT a.*, d.nomDon, d.id as id_donne, r.nomRe, r.id as id_receve FROM donneurs d JOIN avoir a ON d.id = a.id_don JOIN receveurs r ON r.id = a.id_re WHERE a.id = ?");
     $stmt = $pdo->prepare("SELECT a.*, d.nomDon, r.nomRe FROM donneurs d JOIN avoir a ON d.id = a.id_don JOIN receveurs r ON r.id = a.id_re WHERE a.id = ?");
     $stmt->execute(array($id));
     $donne_receve = $stmt->fetch();
     
-    $requete=$pdo->query("select * from donneurs");
+    $requete=$pdo->prepare("SELECT * FROM donneurs");
+    $requete->execute();
     $tous_les_donneurs=$requete->fetchAll();
 
-    $req=$pdo->query("select * from receveurs");
+    $req=$pdo->prepare("SELECT * FROM receveurs");
+    $req->execute();
     $tous_les_receveurs=$req->fetchAll();
 
 ?>
@@ -40,7 +47,7 @@
                         <select class="form-control" name="nom_d">
                             <option value="<?php echo ($donne_receve['id_don']) ? $donne_receve['id_don'] : null; ?>"><?php echo ($donne_receve['nomDon']) ? $donne_receve['nomDon'] : 'Sélectionner le donneur'; ?></option>
                             <?php foreach($tous_les_donneurs as $le_donneur){?>
-                                <option value="<?php echo $le_donneur['id']; ?>"><?php echo $le_donneur['nomDon']; ?></option>
+                                <option value="<?php echo $le_donneur['id']; ?>"><?php echo $le_donneur['nomDon']; ?> (Boeux disponibles : <?php echo $le_donneur['nbrB']; ?>)</option>
                             <?php } ?>
                         </select>
                     </div>

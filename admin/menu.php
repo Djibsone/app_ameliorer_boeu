@@ -26,13 +26,13 @@ $role = $_SESSION['user']['role'];
         <li>
             <a href="../receveurs/page_les_receveurs.php">
                 <span class="fa fa-hand-paper-o"></span>
-                Les Receveurs
+                Les Réceveurs
             </a>
         </li>
         <li>
             <a href="../donnes_receves/page_les_donnes_receves.php">
                 <span class="fa fa-exchange"></span>
-                Les Donnneurs et Receveurs
+                Les transferts
             </a>
         </li>
         <?php if($role=="Administrateur"){?>
@@ -72,7 +72,7 @@ $role = $_SESSION['user']['role'];
                 <li>
                     <a href="../utilisateurs/page_edit_mdp_utilisateur.php?id=<?= $id ?>">
                         <span class="fa fa-vcard-o"></span>&nbsp
-                        Change mon mot de passe
+                        Changer mot de passe
                     </a>
                 </li>
                 <li>

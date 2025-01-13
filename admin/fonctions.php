@@ -232,5 +232,38 @@ function formatNumber($number) {
     }
 }
 
+//Chartjs pour les statistiques
+function generateChart($id, $type, $labels, $data, $colors = [], $options = []) {
+    $defaultColors = ['rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)'];
+    $colors = empty($colors) ? $defaultColors : $colors;
+
+    $chartOptions = json_encode($options);
+    $chartLabels = json_encode($labels);
+    $chartData = json_encode($data);
+    $chartColors = json_encode($colors);
+
+    echo <<<CHART
+    <canvas id="$id"></canvas>
+    <script>
+        const ctx$id = document.getElementById('$id').getContext('2d');
+        new Chart(ctx$id, {
+            type: '$type',
+            data: {
+                labels: $chartLabels,
+                datasets: [{
+                    label: 'Statistiques',
+                    data: $chartData,
+                    backgroundColor: $chartColors,
+                    borderColor: $chartColors.map(color => color.replace(/0.2/, '1')),
+                    borderWidth: 1
+                }]
+            },
+            options: $chartOptions
+        });
+    </script>
+CHART;
+}
+
+
 
 ?>

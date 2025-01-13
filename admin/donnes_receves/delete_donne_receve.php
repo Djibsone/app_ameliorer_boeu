@@ -5,7 +5,13 @@ require '../connexion.php';
 
 $id_donne_receve = $_GET['id'];
 
-$requete = 'DELETE FROM avoir where id=?';
+if (empty($id) || !is_numeric($id)) {
+    $msg = 'Donnée non identifié';
+    $url = 'donnes_receves/page_les_donnes_receves.php';
+    header("location:../message.php?msg=$msg&color=r&url=$url");
+}
+
+$requete = 'DELETE FROM avoir WHERE id=?';
 
 $valeur = [$id_donne_receve];
 

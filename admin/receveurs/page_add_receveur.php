@@ -26,7 +26,7 @@
                         <input type="text" name="nom" id="nom" class="form-control" required>
                     </div>
 
-                    <label class="control-label col-sm-2">SEXE DU RECEVEUR</label>
+                    <label class="control-label col-sm-2">SEXE DU RéCEVEUR</label>
                     <div class="col-sm-4">
                         <input list="sexe" type="text" class="form-control" name="sexe" placeholder="Sexe du receveur" required>                            
                         <datalist id="sexe">

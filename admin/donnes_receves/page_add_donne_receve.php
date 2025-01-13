@@ -5,10 +5,12 @@ require '../connexion.php';
 include '../sheard/head.php';
 include '../menu.php';
 
-$requete = $pdo->query('select * from donneurs');
+$requete = $pdo->prepare('select * from donneurs');
+$requete->execute();
 $tous_les_donneurs = $requete->fetchAll();
 
-$req = $pdo->query('select * from receveurs');
+$req = $pdo->prepare('select * from receveurs');
+$req->execute();
 $tous_les_receveurs = $req->fetchAll();
 ?>
 
@@ -34,7 +36,7 @@ $tous_les_receveurs = $req->fetchAll();
                         <select class="form-control" name="nom_d">
                             <option>Selectionner nom donneur</option>
                             <?php foreach($tous_les_donneurs as $le_donneur){?>
-                            <option value="<?php echo $le_donneur['id']; ?>"><?php echo $le_donneur['nomDon']; ?></option>
+                            <option value="<?php echo $le_donneur['id']; ?>"><?php echo $le_donneur['nomDon']; ?> (Boeux disponibles : <?php echo $le_donneur['nbrB']; ?>)</option>
                             <?php } ?>
                         </select>
                     </div>

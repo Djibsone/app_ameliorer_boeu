@@ -7,6 +7,11 @@
  include '../menu.php';
  
  $id_doneur = $_GET['id'];
+ if (empty($id_doneur) || !is_numeric($id_doneur)) {
+    $msg = 'Donneur non identifié';
+    $url = 'donneurs/page_les_donneurs.php';
+    header("location:../message.php?msg=$msg&color=r&url=$url");
+}
  
  $requete = 'SELECT * FROM donneurs WHERE id=?';
  

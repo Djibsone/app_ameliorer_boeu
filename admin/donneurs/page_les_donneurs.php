@@ -39,7 +39,8 @@ $requete_donneurs = "SELECT
 			FROM donneurs d LEFT JOIN avoir a ON d.id = a.id_don 
 			GROUP BY d.id ORDER BY d.id DESC";
 
-$result_requete_donneurs = $pdo->query($requete_donneurs);
+$result_requete_donneurs = $pdo->prepare($requete_donneurs);
+$result_requete_donneurs->execute();
 $tous_les_donneurs = $result_requete_donneurs->fetchAll();
 ?>
 
@@ -83,17 +84,17 @@ $tous_les_donneurs = $result_requete_donneurs->fetchAll();
             <?php foreach($tous_les_donneurs as $le_donneur){?>
             <tr>
                 <td><?= $i += 1 ?> </td>
-                <td><?= $le_donneur['nomDon'] ?> </td>
-                <td><?= $le_donneur['sexe'] ?> </td>
-                <td><?= $le_donneur['nbrB'] ?> </td>
-                <td><?= $le_donneur['nbr_total_de_boeux'] ?> </td>
+                <td><?= $le_donneur['nomDon'] ?></td>
+                <td><?= $le_donneur['sexe'] ?></td>
+                <td><?= $le_donneur['nbrB'] ?></td>
+                <td><?= $le_donneur['nbr_total_de_boeux'] ?></td>
                 <?php if($_SESSION['user']['role']=="Administrateur"){?>
                 <td>
                     <a href="page_edit_donneur.php?id=<?= $le_donneur['id'] ?>" class="btn btn-success btn-edit-delete">
                         <span class="fa fa-edit"></span>
                     </a>
                     &nbsp&nbsp
-                    <a onclick='return confirm("Etes-vous sûr de vouloir supprimer ?")'
+                    <a onclick='return confirm("Etes-vous sûr de supprimer <?= $le_donneur["nomDon"] ?> ???")'
                         href="delete_donneur.php?id=<?= $le_donneur['id'] ?>" class="btn btn-danger btn-edit-delete">
                         <span class="fa fa-trash"></span>
                     </a>

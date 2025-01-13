@@ -18,7 +18,7 @@ $stmt->execute([$id]);
 $data = $stmt->fetch();
 $ajout = $data['nbrB'] + $nombre;
 
-$resultat = $pdo->prepare('UPDATE donneurs SET nomDon=?,sexe=?,nbrB=? where id=?');
+$resultat = $pdo->prepare('UPDATE donneurs SET nomDon=?,sexe=?,nbrB=? WHERE id=?');
 $resultat->execute([$nom, $sexe, $ajout, $id]);
 
 $msg = 'Donneur modifié avec succes';

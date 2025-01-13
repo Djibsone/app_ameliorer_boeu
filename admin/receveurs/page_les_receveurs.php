@@ -9,16 +9,17 @@ $requete = "SELECT r.*, COALESCE(SUM(a.nbreB), 0) AS nbr_total_de_boeux
 				FROM receveurs r LEFT JOIN avoir a ON r.id = a.id_re 
 				GROUP BY r.id 
 				ORDER BY r.id DESC";
-$result = $pdo->query($requete);
+$result = $pdo->prepare($requete);
+$result->execute();
 $tous_les_receveurs = $result->fetchAll();
 ?>
 
 <br><br><br><br>
 <div class="container">
 
-    <h1 class="text-center"> Liste des receveurs </h1>
+    <h1 class="text-center"> Liste des réceveurs </h1>
     <div class="panel panel-primary">
-        <div class="panel-heading">Rechecher les receveurs</div>
+        <div class="panel-heading">Rechecher les réceveurs</div>
         <div class="panel-body">
             <form class="form-inline" method="post">
                 <input type="text" name="q" id="q" class="form-control lg"
@@ -37,7 +38,7 @@ $tous_les_receveurs = $result->fetchAll();
                 <th class="text-center">N°</th>
                 <th class="text-center">Nom</th>
                 <th class="text-center">Sexe</th>
-                <th class="text-center">Localité des receveurs</th>
+                <th class="text-center">Localité des réceveurs</th>
                 <th class="text-center">Total des boeux réçu</th>
                 <?php if($_SESSION['user']['role']=="Administrateur"){?>
                 <th class="text-center"> Action</th>
@@ -60,7 +61,7 @@ $tous_les_receveurs = $result->fetchAll();
                         class="btn btn-success btn-edit-delete"><span class="fa fa-edit"></span>
                     </a>
 
-                    <a onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')"
+                    <a onclick="return confirm('Etes-vous sûr de supprimer <?= $le_receveur['nomRe'] ?> ???')"
                         href="delete_receveur.php?id=<?= $le_receveur['id'] ?>" class="btn btn-danger btn-edit-delete"><span
                             class="fa fa-trash"></span>
                     </a>
@@ -73,7 +74,7 @@ $tous_les_receveurs = $result->fetchAll();
     <div class="error"></div>
     <?php if($_SESSION['user']['role']=='Administrateur'){  ?>
     <a href="page_add_receveur.php" class="btn btn-primary">
-        <span class="fa fa-plus"></span> NOUVEAU RECEVEUR
+        <span class="fa fa-plus"></span> NOUVEAU RÉCEVEUR
     </a>
     <?php } ?>
 </div>
